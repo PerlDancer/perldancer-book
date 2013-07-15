@@ -51,7 +51,7 @@ sub get_code_samples {
         $codes{$anchor} = $sample;
 
         die "Code sample $sample is not valid"
-          if system("/usr/bin/env perl -cw $sample") != 0;
+          if system("/usr/bin/env perl -MDancer -cw $sample") != 0;
     }
 
     return \%codes;

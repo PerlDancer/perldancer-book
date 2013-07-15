@@ -285,7 +285,7 @@ sub generate_ebook
     mkdir $dir unless -e $dir;
 
     # Generate the ePub eBook.
-    my $filename = catfile(qw(build epub modern_perl.epub));
+    my $filename = catfile(qw(build epub perldancer.epub));
     $epub->pack_zip($filename);
 }
 
