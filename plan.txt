@@ -1,0 +1,43 @@
+Dancing with Perl
+
+A gentle introduction to modern and fun web development
+
+
+Introduction
+  . Origins
+  . The concept of Micro-Frameworks
+  . A Domain-Specific Language for web development
+  . Versions of Dancer
+
+1. First moves
+  . A Minimal Web Application
+  . The PSGI specification
+  . Scaffolded applications
+  . Running the app
+
+2. Route Handlers
+  . Conventions and Design
+  . A Word about HTTP
+  . Parameters
+  . Rendering content
+
+3. Sessions
+  . Concept of sessions
+  . The session API 
+  . Session Engines
+
+4. Templates
+  . Rendering content with templates
+  . The template API
+  . Template Engines
+
+5. Loggers
+
+6. Serializers
+
+7. Hooks 
+  . before
+
+8. Plugins
+
+

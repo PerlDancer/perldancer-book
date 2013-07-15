@@ -1,0 +1,64 @@
+=head1 A Minimal Web Application
+
+Z<minimal_application>
+
+For our very first web application, we'll use the smallest possible example: a
+I<Hello World> application. What we want to do is to be able to fire a web browser
+on a local port, and see the string I<Hello World> on the resulting page.
+
+With Dancer, this is a simple as that:
+
+L<hello_world>
+
+The first line basically loads the Dancer library, this triggers the C<strict>
+and C<warnings> pragmas and initializes the application. It also loads the DSL 
+in your application's namespace.
+
+The C<get> keyword allows to create a I<route handler> attached to a given path
+(here the root C</>). When an incoming request is received for the given HTTP
+method and path, the code reference is executed.
+
+The return value of that code reference will be used as the content of the
+response to send to the client.
+
+Finally, the C<dance> instruction is used to start the web server.
+
+Let's see what we have when we run this program:
+
+=begin programlisting
+
+    $ perl hello.pl
+    >> Dancer 1.3111 server 5307 listening on http://0.0.0.0:3000
+    == Entering the development dance floor ...
+
+=end programlisting
+
+We can now test it with curlN<Of course you can use your favorite browser to
+test the app, but for clarity in this book's example, we'll use curl which is a
+command line tool for sending HTTP requests.>
+
+=begin programlisting
+
+    $ curl -i http://localhost:3000/
+    HTTP/1.0 200 OK
+    Server: Perl Dancer 1.3111
+    Content-Length: 13
+    Content-Type: text/html
+    X-Powered-By: Perl Dancer 1.3111
+
+    Hello, World!
+
+=end programlisting
+
+Let's step back for a moment. Yes, we have a real web server that powers an
+application written in Perl, able to respond to a GET request. All this with
+just five lines of Perl and one single bash command to run the application.
+
+We don't need a dozen of files to configure the app and an Apache server to
+serve it; all we need is a Perl interpreter with Dancer installed.
+
+As you can imagine, it means that when you start working with Dancer, you're
+ready to fire your code locally as often as you wish, there is literally zero
+administrative work to do.
+
+

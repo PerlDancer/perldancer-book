@@ -1,0 +1,40 @@
+=head1 Working Environment
+
+Z<working_environment>
+
+Before we start, let's install Dancer in our Perl environment. Although you
+could install the Dancer library in your system Perl, it's a better idea to use 
+C<perlbrew> (U<http://perlbrew.pl>).
+
+C<perlbrew> allows you to install and manage multiple versions of Perl 5,
+installed in your home directory. It's very handy because you don't depend on
+the system's version of Perl and you're free to create as many I<prelbrews> as
+you like (if you wish to test multiple versions of Perl 5 for instance, or even
+if you like to have separate Perl 5 environments for specific projects).
+
+Installing C<perlbrew> is as easy as running the following command:
+
+=begin programlisting
+
+    $ curl -L http://install.perlbrew.pl | bash
+
+=end programlisting
+
+Once your perlbrew is ready, install the C<cpanm> tool (which is a very handy
+CPAN client):
+
+=begin programlisting
+
+    $ perlbrew install-cpanm
+
+=end programlisting
+
+At this point, you're ready to go, all you need now is to to install Dancer:
+
+=begin programlisting
+
+    $ cpanm Dancer
+
+=end programlisting
+
+

@@ -1,0 +1,17 @@
+=head2 A DSL for Web Development
+
+Z<DSL>
+
+Dancer is a web microframework for Perl. It's also often referred to as a
+Domain-Specific Language (or DSL) for web development. As a matter of fact, when
+you look at Dancer, the first thing you see is the set of keywords it provides:
+C<get>, C<param>, C<session>, C<template>, C<cookie>... All these are atomic
+helpers designed to do one simple web-related thing. We could see Dancer as a
+small language for describing a web application, actually it's very close to
+that.
+
+In the same spirit as with Perl itself, the core is meant to be kept as small as
+possible and should be complete enough to allow all possible extensions to occur
+in the ecosystem. Perl hackers will recognize here the philosophy of Perl and
+its CPAN, Dancer mimics that with pride.
+

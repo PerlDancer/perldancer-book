@@ -1,0 +1,21 @@
+=head2 PSGI
+
+Z<PSGI>
+
+In 2009, when the first versions of Dancer were published, a little revolution
+embraced the Perl web development scene, with an abstraction layer named PSGI.
+
+Before PSGI, all web frameworks needed to implement different deployment
+solutions for their users: CGI, FastCGI, standalone servers, etc. The same code
+was written by each framework and there wasn't a standard way for deploying a web
+application.
+
+With PSGI, all web frameworks are able to rely on it for deployment needs, it
+allows them to forget about I<how the application is deployed> and let them
+focus on I<how the application is written>.
+
+A Dancer application is a PSGI application, which means that it can be deployed
+virtually anywhere: wherever PSGI is supported, Dancer can run.
+
+This is something less to think about, and more time and brainpower spent on
+the stuff that matters: what your application does.

@@ -1,0 +1,27 @@
+=head2 In the beginning, there was CGI...
+
+Z<CGI>
+
+When first developers started to write web applications, before PHP or Ruby on
+Rails existed, there was one simple and unique way to go: CGI. It wasn't a
+framework, nor a design pattern per say, it was a name for describing a program
+that spoke HTTP.
+
+A CGI script had to parse the query string in order to extract parameters into a
+handy form, it had to dispatch the execution flow to an appropriate function and
+then, to take care of the output, making sure all needed headers would be sent
+to the response body.
+
+With CGI, there is no abstraction of the communication layer: the program
+I<speaks> HTTP. It's possible to use helper functions, but the notion of HTTP is
+deeply embedded into the program's logic.
+
+It works, yes, but it's very complex to maintain because business logic (what
+your program does) and implementation details (how it's working) are completely
+mixed together.
+
+After more than a decade, it's now well known in the Perl community that using
+the CGI module for writing a web application is probably the worst idea one can
+have.
+
+

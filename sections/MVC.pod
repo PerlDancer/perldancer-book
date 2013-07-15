@@ -1,0 +1,37 @@
+=head2 MVC Frameworks
+
+Z<MVC>
+
+It became quite quickly obvious that CGI was not able to scale nicely with
+complex applications, and that mixing the application logic with communication
+details led to more and more confusion in the resulting code.
+
+Different attempts were made to find better ways for writing web applications
+and an old paradigm was seen to be a very good fit: the Model-View-Controller
+design pattern. It's a mistake to think that MVC was invented during the Web 2.0
+excitement era, it was actually invented at Xerox Park in 1979 when first
+graphic interfaces were being designed.
+
+It appears that MVC fits perfectly for web development needs and many frameworks
+implemented that paradigm and built powerful systems on top of it, one of the 
+most popular was Ruby on Rails, but all languages had their own: Zend or Symfony
+for PHP, Django for Python and Catalyst for Perl.
+
+MVC frameworks are a good approach and the paradigm itself ensures a clean
+code structure: database queries are handled by the models, controllers 
+make sure dispatching rules are properly handled and all rendering needs are
+powered by views.
+
+This comes at a price though, the whole system is quite big and lots of
+conventions are to be kept in mind. Each MVC framework comes with its own
+vision of what MVC is, and how it's implemented. The learning curve is a bit
+long, one needs to first understand how the M, the V and the C are connected
+together in the framework. Then all the configuration details should be
+understood because of their impact on the resulting application. Most of the
+time, when a new MVC framework is tackled, the easiest way to proceed is to
+bootstrap a new default application, and move from there.
+
+MVC is clearly better than CGI, it abstracts the HTTP layer and ensures a nice
+structure for the application code, but it's a bit heavyweight.
+
+

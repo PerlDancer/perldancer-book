@@ -1,0 +1,142 @@
+=head1 A word about HTTP
+
+Z<HTTP>
+
+As you've seen in the hello world example, we declared the route handler with
+the C<get> keyword. That keyword is named after the HTTP method it maps. It's
+not necessary to have a complete understanding of all the details of the HTTP
+protocol, but it's good have the basics in mind when writing a web application.
+
+HTTP is a request-response protocol in the client-server computing
+model. For instance a web browser may be the client (or the I<user agent>) and a
+web application hosted on computer may be the server.
+
+Clients send I<requests> and servers send them I<responses> back.
+
+=head2 Requests
+
+Requests are sent by the client to ask for a specific action on the server side,
+the action can be either a read-only matter or can try to alter the
+application's environment.
+
+A request is composed by a I<method>, a I<path>, an optional list of I<header>
+and possibly a I<body>.
+
+=head3 Methods
+
+HTTP methods tell what kind of action is requested by the client, depending on
+the impact of the action, the appropriate method should be used.
+
+=over 
+
+=item C<GET>
+
+Retrieves whatever information (in the form of an entity) is identified by the
+I<Request-URI> (or I<path>).
+
+=item C<HEAD>
+
+Identical to GET except that the server must not return a message-body in the response.
+
+=item C<POST>
+
+Requests that the server accept the entity enclosed in the request-body as a
+new subordinate of the resource identified by the I<Request-URI>. This is
+typically a I<create> action.
+
+=item C<PUT>
+
+Requests that the sever update the entity identified by the I<Request-URI> with
+the entity enclosed in the request-body. This is typically an I<update> action.
+
+=item C<DELETE>
+
+Requests that the sever delete the entity identified by the I<Request-URI>.
+
+=back
+
+=head3 Request-URI (or Paths)
+
+The request-URI or path is the I<Uniform Resource Identifier>, it is unique in
+the application namespace, it can be absolute or relative.
+
+For example, when accessing C<http://example.com/something>, the relative path
+is C</something>.
+
+=head3 Headers
+
+A request can provide headers, they are used by the client to add precision
+about the request sent, as for example an expected format for the response, or
+for defining a context (like providing cookies for instance).
+
+=head3 Body
+
+Finally, a request can contain a I<body>, in situation where an entity is to be
+submitted to the application, the entity will be encoded in a particular format
+and sent in the body.
+
+For instance, if you upload a picture of your dog on your favorite social
+network, your browser will encode it and send it to the website via the request
+body.
+
+=head2 Responses
+
+When a web application receives a request, it always send a response back. The
+response is also composed by different elements: a status code, a list of
+headers and a body.
+
+=head3 Status
+
+The status is a code that describes the kind of response that is sent. Statuses
+are grouped by classes which can be summarized like so:
+
+=over
+
+=item C<1xx>
+
+This class of status code indicates a provisional response, consisting only of
+the Status-Line and optional headers, and is terminated by an empty line.
+
+=item C<2xx>
+
+This class of status code indicates that the client's request was successfully
+received, understood, and accepted.
+
+=item C<3xx>
+
+This class of status code indicates that further action needs to be taken by the
+user agent in order to fulfill the request.
+
+=item C<4xx>
+
+This class of status code indicates cases in which the client seems to have
+erred. The server does not allow or understand the client's request.
+
+=item C<5xx>
+
+This class of status code indicates cases in which the server is aware that it
+has erred or is incapable of performing the request. The client request is fine,
+and understood, but for some reason, the server is unable to proceed.
+
+=back
+
+You don't need to know all the possible status codes, but it's good to know the most commonly used:
+
+C<200> means that everything is fine, C<302> tells the client to redirect its
+call to another location, C<404> complains about an unknown resource and C<500>
+cries about an internal server error.
+
+=head3 Headers
+
+Headers are used by the application to give more details about the response,
+sometimes, the status implies the presence of a header.
+
+A classic and mandatory header is C<Content-type>, which tells the client the
+format of the response body (C<text/html> being the value when requesting an
+HTML page, for instance).
+
+=head3 Body
+
+Finally, the response body is the content itself of the response, when you
+access your blog's homepage, the body of the response sent by your web server is
+the HTML content.

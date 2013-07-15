@@ -1,0 +1,24 @@
+=pod
+
+=head0 First Moves
+
+=begin epigraph
+
+"One's destination is never a place, but a new way of seeing things."
+
+- Henry Miller
+
+=end epigraph
+
+In this chapter we'll setup our working environment, we'll get to know Dancer's 
+basics and we'll write our first web application with it.
+
+L<working_environment>
+
+L<minimal_application>
+
+L<HTTP>
+
+L<scaffolded_application>
+
+=cut

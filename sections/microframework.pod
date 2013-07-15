@@ -1,0 +1,39 @@
+=head2 The concept of Micro-Frameworks
+
+Z<microframework>
+
+At some point, a new idea rose in the web development scene. What if we could
+have a good abstraction system, a nice code organization and a lightweight
+system at the same time?
+
+What if there was a way to describe a web application in it's purest form while
+forgetting about the deployment and communication layers and yet avoiding too
+much boilerplate code?
+
+When the Sinatra framework was published in 2008, that is certainly the kind of
+feeling that developers had when using it. Sinatra introduced a new paradigm for
+web application development, a way of doing things where I<lightweight> was the
+golden rule.
+
+When I discovered Sinatra in summer 2009, I admired the elegant design it has,
+and looked for something similar in Perl. As I didn't find anything close to it,
+I started to play with a little experiment that tried to implement a
+Sinatra-like system with Perl. Dancer was born. Today, there is a
+microframework in quite each dynamic language: Ruby has Sinatra (obviously), 
+PHP has Slim, Python has Flask and Perl has Dancer.
+
+The concept of microframeworks describes the idea of a library that allows
+development of a web application with a minimal set of tools. The core of the
+library is meant to be kept small yet should not lack features. A microframework
+should provide the essentials bits everyone needs to write a web application and
+should provide ways to add or change every parts that are not mandatory.
+
+In short, a microframework let you write your web application while staying out
+of the way as much as possible. This gives two major advantages over classic MVC
+frameworks: a very short learning curve and maximum freedom for the developer.
+
+I think that's why most of PerlDancer users claim they I<enjoy> writing web
+applications with it: because it's so simple they can start doing things after a 
+few minutes and as they go with their development, they realize how free they are.
+
+

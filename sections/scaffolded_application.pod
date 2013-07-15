@@ -1,0 +1,3 @@
+=head1 Scaffolded Applications
+
+Z<scaffolded_application>

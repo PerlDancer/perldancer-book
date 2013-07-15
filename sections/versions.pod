@@ -1,0 +1,15 @@
+=head1 Versions of Dancer
+
+Z<versions>
+
+Dancer exists in two versions at the time of this writing, version 1 and 2.
+
+Dancer 1 is the most widely used version of Dancer, as it's out since 2009 and
+has a quite big ecosystem of extensions available on the CPAN. Dancer 2 is
+younger (published in 2013) but supports all the DSL features of Dancer 1 with a
+better core.
+
+This book is a reference about Dancer's philosophy, DSL and ecosystem and hence 
+is meaningful for both versions 1 and 2. All examples in this book will be
+made with Dancer but all of them apply to Dancer 2.
+
