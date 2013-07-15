@@ -1,6 +1,12 @@
-=head1 A Minimal Web Application
+=head1 The Dancer Salute: A Minimal Web Application
 
 Z<minimal_application>
+
+In this section we'll play with a very little application to show off the spirit
+of Dancer. We'll start with the simplest application possible and will build up
+iteratively.
+
+=head2 A static route
 
 For our very first web application, we'll use the smallest possible example: a
 I<Hello World> application. What we want to do is to be able to fire a web browser
@@ -33,9 +39,9 @@ Let's see what we have when we run this program:
 
 =end programlisting
 
-We can now test it with curlN<Of course you can use your favorite browser to
-test the app, but for clarity in this book's example, we'll use curl which is a
-command line tool for sending HTTP requests.>
+We can now test it with C<curl>. Note that you can obviously use your favorite browser to
+test the application, but for better clarity in this book's examples, we'll use
+C<curl> which is a command line tool for sending HTTP requests.
 
 =begin programlisting
 
@@ -50,15 +56,150 @@ command line tool for sending HTTP requests.>
 
 =end programlisting
 
-Let's step back for a moment. Yes, we have a real web server that powers an
+Let's step back for a moment. We have a real web server that powers an
 application written in Perl, able to respond to a GET request. All this with
 just five lines of Perl and one single bash command to run the application.
 
-We don't need a dozen of files to configure the app and an Apache server to
+We don't need a dozen of files to configure the application and an Apache server to
 serve it; all we need is a Perl interpreter with Dancer installed.
 
 As you can imagine, it means that when you start working with Dancer, you're
 ready to fire your code locally as often as you wish, there is literally zero
 administrative work to do.
+
+This I<Hello World> application is a bit boring, what about adding more juice to
+it? Let's say we want to give it the ability to salute each user with their own
+name. How could we do that?
+
+=head2 Parameters
+
+We have the generic I<Hello World> action, which says the same thing to every
+one, let's add another route handler to our file which can take a parameter: the
+name of the user to salute.
+
+L<hello_name>
+
+The interesting part here is the string passed to the route declaration:
+C<"/hello/:name">. The C<:name> part is called a I<named token>. It's used as a
+placeholder by Dancer's core to construct a capture for the given route. The
+separator used is the slash character, meaning that you can chain named tokens
+like so: C</somethin/:foo/and/:bar> and it will do as expected.
+
+Let's test that new route:
+
+=begin programlisting
+
+    $ curl http://0.0.0.0:3000/hello/John
+    Hello, John!
+
+=end programlisting
+
+As you can see, any substring captured by named tokens is accessible via
+the C<param> keyword, as done in the example above. Also, it's possible to get
+the whole parameters hashref Dancer has built via the C<params> keyword (note
+the plural).
+
+So this:
+
+=begin programlisting
+
+    my $name = param('name');
+
+=end programlisting
+
+Is equivalent to:
+
+=begin programlisting
+
+    my $name = params->{'name'};
+
+=end programlisting
+
+Many other things can be done with parameters and route patterns, but we won't
+cover them here, we'll do that in the I<DSL Reference>.
+
+What about rendering something more complex that a dummy string? What if we want
+to produce a nice HTML/CSS output for saluting our user in a more modern manner?
+
+Well, we certainly don't want to construct our HTML content in the route code,
+that would mix the controller (the route) and the view (the content to render),
+which is bad.
+
+To do that nicely, we'll use a new keyword: C<template> which allows us to
+render a template (with the engine of our choice) and send the resulting content
+as the response body.
+
+=head2 Views
+
+Any experienced web developer know that mixing application logic with rendering
+content is a horror. When you do that, be sure that your code is going to change
+into a werewolf and will come back to bite you when you're unprepared! And the
+analogy is maybe too gentle compared to the reality, I'm serious.
+
+So we want to use I<views> or I<templates> to contain our content, in separate
+files. Dancer provides a nice way to do that, it has a I<views> directory, which
+defaults to a C<views> directory in your application's root, any file stored in
+that location will be available for views rendering via the C<template> keyword.
+
+The C<template> keyword takes the view to parse as its first argument, and a
+hashref of I<tokens> to interpolate in the view. It returns the resulting
+content.
+
+For the C<template> keyword to be available, we need to enable a 
+I<template engine>. We'll use the well-known C<Template::Toolkit> via the
+following instruction:
+
+=begin programlisting
+
+    set template => 'template_toolkit';
+
+=end programlisting
+
+The C<set> command allows the application to add values in the application
+settings registry, here we alter the value of the C<template> engine.
+
+Now that we can use the C<template> keyword in our routes, let's create a view:
+C<views/hello.tt>
+
+=begin programlisting
+
+    <html>
+      <head>
+        <title>Dancer Salute</title>
+      </head>
+      <body>
+        <h1>Hello <% name %></h1>
+      </body>
+    </html>
+
+=end programlisting
+
+We can now render a content with it, using the C<template> keyword in our route:
+
+=begin programlisting
+
+    template 'hello', { name => "John" };
+
+=end programlisting
+
+The resulting code of the route handler becomes:
+
+L<hello_name_tt>
+
+And it works as expected:
+
+=begin programlisting
+
+    $ curl http://0.0.0.0:3000/hello/John
+    <html>
+      <head>
+        <title>Dancer Salute</title>
+      </head>
+      <body>
+        <h1>Hello John</h1>
+      </body>
+    </html>
+
+=end programlisting
 
 

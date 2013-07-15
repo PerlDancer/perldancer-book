@@ -2,14 +2,12 @@
 
 Z<HTTP>
 
-As you've seen in the hello world example, we declared the route handler with
-the C<get> keyword. That keyword is named after the HTTP method it maps. It's
-not necessary to have a complete understanding of all the details of the HTTP
-protocol, but it's good have the basics in mind when writing a web application.
-
 HTTP is a request-response protocol in the client-server computing
 model. For instance a web browser may be the client (or the I<user agent>) and a
 web application hosted on computer may be the server.
+
+It's not necessary to have a complete understanding of all the details of the HTTP
+protocol, but it's good have the basics in mind when writing a web application.
 
 Clients send I<requests> and servers send them I<responses> back.
 
