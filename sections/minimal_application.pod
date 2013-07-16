@@ -208,7 +208,7 @@ It's getting better, we're producing an HTML output by reading a template, but
 we don't want to create many templates with always the same HTML layout. This
 would be error prone and a pain to maintain.
 
-Dancer allows us to create a I<layout> with is a special template that is
+Dancer allows us to create a I<layout> which is a special template that is
 supposed to wrap other views.
 
 For instance, we could change our C<hello.tt> view into a layout like so:
@@ -227,17 +227,125 @@ For instance, we could change our C<hello.tt> view into a layout like so:
 =end programlisting
 
 The special token C<content> will be replaced by the content of the current
-template. With this layout stored in the layouts directory
-(C<appdir/views/layouts/>) we can do change our hello.tt template to just the
-following:
+template to render. Other tokes (like I<title> in this example) would be
+interpolated as usual with the current context.
+
+With this layout stored in the layouts directory, for instance as
+C<appdir/views/layouts/main.tt>, we can change our C<hello.tt> template to just 
+the following:
 
 =begin programlisting
 
-    <h1>Hello, <% name %>!
+    <h1>Hello, <% name %>!</h1>
 
 =end programlisting
 
 And the code of the action will be changed to enable the layout by default:
 
 L<hello_name_tt_layout>
+
+This is a very good way to factorize common parts of your views.
+
+=head2 Static files
+
+Hmm, our website doesn't look very nice, it's a plain old HTML file without any
+styling! We need a CSS style sheet. But how will we serve it? Do we need to
+create a route to serve a static file? It could indeed be easy to do... 
+
+You're familiar with Dancer's concepts now, so I'm sure you could write it just
+now.  Close this book, and write a route that render a static file, and then
+come back here, I'll waitN<Well, I might grab a beer meanwhile, but
+I'm sure you'll forgive me>.
+
+OK, so let's see what we have:
+
+L<static_file>
+
+Wow, OK, I cheated a bit. I'm using here a couple of keywords from the DSL that
+we don't already know: C<status> and C<header>, but aren't you able to guess
+what they do?
+
+I'm sure you are! Obviously, C<status> lets us alter the status code Dancer will
+send to the client (the default is C<200>) and C<header> sets a new header to
+the response (here the content length of the body, which is a good thing to do,
+if we want to be a polite HTTP server!).
+
+Let's test that (assuming we have a C<./pulic> directory locally when running
+the application):
+
+=begin programlisting
+
+    $ cat > ./public/foo.txt
+    This is foo
+
+    $ curl -i http://0:3000/foo.txt
+    HTTP/1.0 200 OK
+    Server: Perl Dancer 1.3116
+    Content-Length: 12
+    Content-Type: text/html
+    Content-Lenght: 12
+    X-Powered-By: Perl Dancer 1.3116
+
+    This is foo
+
+=end programlisting
+
+Nice. That route handler is able to serve a static file. Hmm, but we don't need
+to implement that, do we? Of course not. It was an interesting question for the
+reader at this point of the book, that's all!
+
+Dancer - of course - comes with a built-in feature that allows you to serve any
+file hosted in a public directory (which is by default C<appdir/public>).
+
+So back to our little application example, if we want to provide a CSS file, we
+just need to create a C<public> directory and put it there (or even better, in
+C<public/css/style.css>).
+
+
+=head2 Configuration
+
+Wait a minute. If we look back at what we've said in this section, we've defined
+to settings to our application: C<template> and C<layout>. We did that directly
+in our application's code. What if we want to separate that (how the application
+is configured) from the code (what the application is doing)?
+
+Well, it's indeed a good habit to store all configuration bits in... a
+configuration file. Dancer allows us to do so, when it initializes the
+application, it'll look for a C<config.yml> file and will load its values into
+the application's registry.
+
+In our case, we could just add a config.yml file with the following content:
+
+=begin programlisting
+
+    template: "template_toolkit"
+    layout: "main"
+
+=end programlisting
+
+=head2 Bootstraping an application
+
+So, we've moved step by step from a single script to a more structured
+application with templates, static files and configuration files, and we did
+that manually.
+
+Obviously, when we start a new application from scratch, and we know we want
+that application to be a real website (instead of a web service, for instance),
+it's a bit boring to create all the needed files by hand.
+
+Dancer provides a nice helper to bootstrap the application structure, just like
+so:
+
+=begin programlisting
+
+    $ dancer -a MyAwesomeApp
+    ...
+
+=end programlisting
+
+This will create a directory named C<MyAwesomeApp> which will contain a fully
+functional application (even with unit tests!).
+
+The app can be started with the command C<perl ./bin/app.pl> and even provide a
+nice default homepage.
 

@@ -16,6 +16,18 @@ basics and we'll write our first web application with it.
 L<working_environment>
 L<HTTP>
 L<minimal_application>
-L<scaffolded_application>
+
+=head1 Conclusion
+
+We've seen in this chapter how we could create a Dancer application from
+scratch, starting with a dummy I<Hello World> thing to a (still dummy) more
+complex application with template, static files and configuration bits.
+
+Of course, Dancer is much much more than that tip of the iceberg we've just
+seen, but I hope this chapter helped to give you an idea of how things are done
+with it.
+
+We'll now continue our journey to better and more fun web development with a
+chapter focused on the power of route handlers.
 
 =cut
