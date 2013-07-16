@@ -20,6 +20,8 @@ The first line basically loads the Dancer library, this triggers the C<strict>
 and C<warnings> pragmas and initializes the application. It also loads the DSL 
 in your application's namespace.
 
+X<get>
+
 The C<get> keyword allows to create a I<route handler> attached to a given path
 (here the root C</>). When an incoming request is received for the given HTTP
 method and path, the code reference is executed.
@@ -39,9 +41,9 @@ Let's see what we have when we run this program:
 
 =end programlisting
 
-We can now test it with C<curl>. Note that you can obviously use your favorite browser to
-test the application, but for better clarity in this book's examples, we'll use
-C<curl> which is a command line tool for sending HTTP requests.
+We can now test it with C<curl>. Note that you can obviously use your favorite
+browser to test the application, but for better clarity in this book's examples,
+we'll use C<curl> which is a command line tool for sending HTTP requests.
 
 =begin programlisting
 
@@ -60,8 +62,8 @@ Let's step back for a moment. We have a real web server that powers an
 application written in Perl, able to respond to a GET request. All this with
 just five lines of Perl and one single bash command to run the application.
 
-We don't need a dozen of files to configure the application and an Apache server to
-serve it; all we need is a Perl interpreter with Dancer installed.
+We don't need a dozen of files to configure the application and an Apache server
+to serve it; all we need is a Perl interpreter with Dancer installed.
 
 As you can imagine, it means that when you start working with Dancer, you're
 ready to fire your code locally as often as you wish, there is literally zero
@@ -202,4 +204,40 @@ And it works as expected:
 
 =end programlisting
 
+It's getting better, we're producing an HTML output by reading a template, but
+we don't want to create many templates with always the same HTML layout. This
+would be error prone and a pain to maintain.
+
+Dancer allows us to create a I<layout> with is a special template that is
+supposed to wrap other views.
+
+For instance, we could change our C<hello.tt> view into a layout like so:
+
+=begin programlisting
+
+    <html>
+      <head>
+        <title><% title %></title>
+      </head>
+      <body>
+        <% content %>
+      </body>
+    </html>
+
+=end programlisting
+
+The special token C<content> will be replaced by the content of the current
+template. With this layout stored in the layouts directory
+(C<appdir/views/layouts/>) we can do change our hello.tt template to just the
+following:
+
+=begin programlisting
+
+    <h1>Hello, <% name %>!
+
+=end programlisting
+
+And the code of the action will be changed to enable the layout by default:
+
+L<hello_name_tt_layout>
 
