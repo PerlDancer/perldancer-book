@@ -1,3 +1,7 @@
+DEPENDENCIES:
+
+    Pod::PsuedoPod::HTML
+
 
 To build the chapters:
 
