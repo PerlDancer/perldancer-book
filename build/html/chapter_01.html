@@ -1,0 +1,489 @@
+<html>
+<body>
+<link rel='stylesheet' href='style.css' type='text/css'>
+
+<h1>First Moves</h1>
+
+<div class="epigraph">
+
+<p>"One's destination is never a place, but a new way of seeing things."</p>
+
+<p>- Henry Miller</p>
+
+</div>
+
+<p>In this chapter we'll setup our working environment, we'll get to know Dancer's basics and we'll write our first web application with it.</p>
+
+<h2>Working Environment</h2>
+
+<p><a name="working_environment"></p>
+
+<p>Before we start, let's install Dancer in our Perl environment. Although you could install the Dancer library in your system Perl, it's a better idea to use <code>perlbrew</code> (<font class="url">http://perlbrew.pl</font>).</p>
+
+<p><code>perlbrew</code> allows you to install and manage multiple versions of Perl 5, installed in your home directory. It's very handy because you don't depend on the system's version of Perl and you're free to create as many <em>prelbrews</em> as you like (if you wish to test multiple versions of Perl 5 for instance, or even if you like to have separate Perl 5 environments for specific projects).</p>
+
+<p>Installing <code>perlbrew</code> is as easy as running the following command:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ curl -L http://install.perlbrew.pl | bash</code></pre>
+
+</div>
+
+<p>Once your perlbrew is ready, install the <code>cpanm</code> tool (which is a very handy CPAN client):</p>
+
+<div class="programlisting">
+
+<pre><code>    $ perlbrew install-cpanm</code></pre>
+
+</div>
+
+<p>At this point, you're ready to go, all you need now is to to install Dancer:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ cpanm Dancer</code></pre>
+
+</div>
+
+<h2>A word about HTTP</h2>
+
+<p><a name="HTTP"></p>
+
+<p>HTTP is a request-response protocol in the client-server computing model. For instance a web browser may be the client (or the <em>user agent</em>) and a web application hosted on computer may be the server.</p>
+
+<p>It's not necessary to have a complete understanding of all the details of the HTTP protocol, but it's good have the basics in mind when writing a web application.</p>
+
+<p>Clients send <em>requests</em> and servers send them <em>responses</em> back.</p>
+
+<h3>Requests</h3>
+
+<p>Requests are sent by the client to ask for a specific action on the server side, the action can be either a read-only matter or can try to alter the application's environment.</p>
+
+<p>A request is composed by a <em>method</em>, a <em>path</em>, an optional list of <em>header</em> and possibly a <em>body</em>.</p>
+
+<h4>Methods</h4>
+
+<p>HTTP methods tell what kind of action is requested by the client, depending on the impact of the action, the appropriate method should be used.</p>
+
+<ul>
+
+<li><code>GET</code>
+
+<p>Retrieves whatever information (in the form of an entity) is identified by the <em>Request-URI</em> (or <em>path</em>).</p>
+
+<li><code>HEAD</code>
+
+<p>Identical to GET except that the server must not return a message-body in the response.</p>
+
+<li><code>POST</code>
+
+<p>Requests that the server accept the entity enclosed in the request-body as a new subordinate of the resource identified by the <em>Request-URI</em>. This is typically a <em>create</em> action.</p>
+
+<li><code>PUT</code>
+
+<p>Requests that the sever update the entity identified by the <em>Request-URI</em> with the entity enclosed in the request-body. This is typically an <em>update</em> action.</p>
+
+<li><code>DELETE</code>
+
+<p>Requests that the sever delete the entity identified by the <em>Request-URI</em>.</p>
+
+</ul>
+
+<h4>Request-URI (or Paths)</h4>
+
+<p>The request-URI or path is the <em>Uniform Resource Identifier</em>, it is unique in the application namespace, it can be absolute or relative.</p>
+
+<p>For example, when accessing <code>http://example.com/something</code>, the relative path is <code>/something</code>.</p>
+
+<h4>Headers</h4>
+
+<p>A request can provide headers, they are used by the client to add precision about the request sent, as for example an expected format for the response, or for defining a context (like providing cookies for instance).</p>
+
+<h4>Body</h4>
+
+<p>Finally, a request can contain a <em>body</em>, in situation where an entity is to be submitted to the application, the entity will be encoded in a particular format and sent in the body.</p>
+
+<p>For instance, if you upload a picture of your dog on your favorite social network, your browser will encode it and send it to the website via the request body.</p>
+
+<h3>Responses</h3>
+
+<p>When a web application receives a request, it always send a response back. The response is also composed by different elements: a status code, a list of headers and a body.</p>
+
+<h4>Status</h4>
+
+<p>The status is a code that describes the kind of response that is sent. Statuses are grouped by classes which can be summarized like so:</p>
+
+<ul>
+
+<li><code>1xx</code>
+
+<p>This class of status code indicates a provisional response, consisting only of the Status-Line and optional headers, and is terminated by an empty line.</p>
+
+<li><code>2xx</code>
+
+<p>This class of status code indicates that the client's request was successfully received, understood, and accepted.</p>
+
+<li><code>3xx</code>
+
+<p>This class of status code indicates that further action needs to be taken by the user agent in order to fulfill the request.</p>
+
+<li><code>4xx</code>
+
+<p>This class of status code indicates cases in which the client seems to have erred. The server does not allow or understand the client's request.</p>
+
+<li><code>5xx</code>
+
+<p>This class of status code indicates cases in which the server is aware that it has erred or is incapable of performing the request. The client request is fine, and understood, but for some reason, the server is unable to proceed.</p>
+
+</ul>
+
+<p>You don't need to know all the possible status codes, but it's good to know the most commonly used:</p>
+
+<p><code>200</code> means that everything is fine, <code>302</code> tells the client to redirect its call to another location, <code>404</code> complains about an unknown resource and <code>500</code> cries about an internal server error.</p>
+
+<h4>Headers</h4>
+
+<p>Headers are used by the application to give more details about the response, sometimes, the status implies the presence of a header.</p>
+
+<p>A classic and mandatory header is <code>Content-type</code>, which tells the client the format of the response body (<code>text/html</code> being the value when requesting an HTML page, for instance).</p>
+
+<h4>Body</h4>
+
+<p>Finally, the response body is the content itself of the response, when you access your blog's homepage, the body of the response sent by your web server is the HTML content.</p>
+
+<h2>The Dancer Salute: A Minimal Web Application</h2>
+
+<p><a name="minimal_application"></p>
+
+<p>In this section we'll play with a very little application to show off the spirit of Dancer. We'll start with the simplest application possible and will build up iteratively.</p>
+
+<h3>A static route</h3>
+
+<p>For our very first web application, we'll use the smallest possible example: a <em>Hello World</em> application. What we want to do is to be able to fire a web browser on a local port, and see the string <em>Hello World</em> on the resulting page.</p>
+
+<p>With Dancer, this is a simple as that:</p>
+
+<div class="programlisting">
+
+<pre><code>    use Dancer;
+    
+    get &#39;/&#39; =&gt; sub {
+        &quot;Hello, World!&quot;;
+    };
+    
+    dance;</code></pre>
+
+</div>
+
+<p>The first line basically loads the Dancer library, this triggers the <code>strict</code> and <code>warnings</code> pragmas and initializes the application. It also loads the DSL in your application's namespace.</p>
+
+<p></p>
+
+<p>The <code>get</code> keyword allows to create a <em>route handler</em> attached to a given path (here the root <code>/</code>). When an incoming request is received for the given HTTP method and path, the code reference is executed.</p>
+
+<p>The return value of that code reference will be used as the content of the response to send to the client.</p>
+
+<p>Finally, the <code>dance</code> instruction is used to start the web server.</p>
+
+<p>Let's see what we have when we run this program:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ perl hello.pl
+    &gt;&gt; Dancer 1.3111 server 5307 listening on http://0.0.0.0:3000
+    == Entering the development dance floor ...</code></pre>
+
+</div>
+
+<p>We can now test it with <code>curl</code>. Note that you can obviously use your favorite browser to test the application, but for better clarity in this book's examples, we'll use <code>curl</code> which is a command line tool for sending HTTP requests.</p>
+
+<div class="programlisting">
+
+<pre><code>    $ curl -i http://localhost:3000/
+    HTTP/1.0 200 OK
+    Server: Perl Dancer 1.3111
+    Content-Length: 13
+    Content-Type: text/html
+    X-Powered-By: Perl Dancer 1.3111
+
+    Hello, World!</code></pre>
+
+</div>
+
+<p>Let's step back for a moment. We have a real web server that powers an application written in Perl, able to respond to a GET request. All this with just five lines of Perl and one single bash command to run the application.</p>
+
+<p>We don't need a dozen of files to configure the application and an Apache server to serve it; all we need is a Perl interpreter with Dancer installed.</p>
+
+<p>As you can imagine, it means that when you start working with Dancer, you're ready to fire your code locally as often as you wish, there is literally zero administrative work to do.</p>
+
+<p>This <em>Hello World</em> application is a bit boring, what about adding more juice to it? Let's say we want to give it the ability to salute each user with their own name. How could we do that?</p>
+
+<h3>Parameters</h3>
+
+<p>We have the generic <em>Hello World</em> action, which says the same thing to every one, let's add another route handler to our file which can take a parameter: the name of the user to salute.</p>
+
+<div class="programlisting">
+
+<pre><code>    get &quot;/hello/:name&quot; =&gt; sub {
+        my $name = param(&#39;name&#39;);
+        &quot;Hello, $name!&quot;;
+    };</code></pre>
+
+</div>
+
+<p>The interesting part here is the string passed to the route declaration: <code>"/hello/:name"</code>. The <code>:name</code> part is called a <em>named token</em>. It's used as a placeholder by Dancer's core to construct a capture for the given route. The separator used is the slash character, meaning that you can chain named tokens like so: <code>/somethin/:foo/and/:bar</code> and it will do as expected.</p>
+
+<p>Let's test that new route:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ curl http://0.0.0.0:3000/hello/John
+    Hello, John!</code></pre>
+
+</div>
+
+<p>As you can see, any substring captured by named tokens is accessible via the <code>param</code> keyword, as done in the example above. Also, it's possible to get the whole parameters hashref Dancer has built via the <code>params</code> keyword (note the plural).</p>
+
+<p>So this:</p>
+
+<div class="programlisting">
+
+<pre><code>    my $name = param(&#39;name&#39;);</code></pre>
+
+</div>
+
+<p>Is equivalent to:</p>
+
+<div class="programlisting">
+
+<pre><code>    my $name = params-&gt;{&#39;name&#39;};</code></pre>
+
+</div>
+
+<p>Many other things can be done with parameters and route patterns, but we won't cover them here, we'll do that in the <em>DSL Reference</em>.</p>
+
+<p>What about rendering something more complex that a dummy string? What if we want to produce a nice HTML/CSS output for saluting our user in a more modern manner?</p>
+
+<p>Well, we certainly don't want to construct our HTML content in the route code, that would mix the controller (the route) and the view (the content to render), which is bad.</p>
+
+<p>To do that nicely, we'll use a new keyword: <code>template</code> which allows us to render a template (with the engine of our choice) and send the resulting content as the response body.</p>
+
+<h3>Views</h3>
+
+<p>Any experienced web developer know that mixing application logic with rendering content is a horror. When you do that, be sure that your code is going to change into a werewolf and will come back to bite you when you're unprepared! And the analogy is maybe too gentle compared to the reality, I'm serious.</p>
+
+<p>So we want to use <em>views</em> or <em>templates</em> to contain our content, in separate files. Dancer provides a nice way to do that, it has a <em>views</em> directory, which defaults to a <code>views</code> directory in your application's root, any file stored in that location will be available for views rendering via the <code>template</code> keyword.</p>
+
+<p>The <code>template</code> keyword takes the view to parse as its first argument, and a hashref of <em>tokens</em> to interpolate in the view. It returns the resulting content.</p>
+
+<p>For the <code>template</code> keyword to be available, we need to enable a <em>template engine</em>. We'll use the well-known <code>Template::Toolkit</code> via the following instruction:</p>
+
+<div class="programlisting">
+
+<pre><code>    set template =&gt; &#39;template_toolkit&#39;;</code></pre>
+
+</div>
+
+<p>The <code>set</code> command allows the application to add values in the application settings registry, here we alter the value of the <code>template</code> engine.</p>
+
+<p>Now that we can use the <code>template</code> keyword in our routes, let's create a view: <code>views/hello.tt</code></p>
+
+<div class="programlisting">
+
+<pre><code>    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Dancer Salute&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;Hello &lt;% name %&gt;&lt;/h1&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+
+</div>
+
+<p>We can now render a content with it, using the <code>template</code> keyword in our route:</p>
+
+<div class="programlisting">
+
+<pre><code>    template &#39;hello&#39;, { name =&gt; &quot;John&quot; };</code></pre>
+
+</div>
+
+<p>The resulting code of the route handler becomes:</p>
+
+<div class="programlisting">
+
+<pre><code>    set template =&gt; &#39;template_toolkit&#39;;
+    
+    get &#39;/hello/:name&#39; =&gt; sub {
+        my $name = param(&#39;name&#39;);
+        template &#39;hello&#39;, { name =&gt; $name };
+    };</code></pre>
+
+</div>
+
+<p>And it works as expected:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ curl http://0.0.0.0:3000/hello/John
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Dancer Salute&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;Hello John&lt;/h1&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+
+</div>
+
+<p>It's getting better, we're producing an HTML output by reading a template, but we don't want to create many templates with always the same HTML layout. This would be error prone and a pain to maintain.</p>
+
+<p>Dancer allows us to create a <em>layout</em> which is a special template that is supposed to wrap other views.</p>
+
+<p>For instance, we could change our <code>hello.tt</code> view into a layout like so:</p>
+
+<div class="programlisting">
+
+<pre><code>    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;&lt;% title %&gt;&lt;/title&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;% content %&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;</code></pre>
+
+</div>
+
+<p>The special token <code>content</code> will be replaced by the content of the current template to render. Other tokes (like <em>title</em> in this example) would be interpolated as usual with the current context.</p>
+
+<p>With this layout stored in the layouts directory, for instance as <code>appdir/views/layouts/main.tt</code>, we can change our <code>hello.tt</code> template to just the following:</p>
+
+<div class="programlisting">
+
+<pre><code>    &lt;h1&gt;Hello, &lt;% name %&gt;!&lt;/h1&gt;</code></pre>
+
+</div>
+
+<p>And the code of the action will be changed to enable the layout by default:</p>
+
+<div class="programlisting">
+
+<pre><code>    set template =&gt; &#39;template_toolkit&#39;;
+    set layout =&gt; &#39;main&#39;;
+    
+    get &#39;/hello/:name&#39; =&gt; sub {
+        my $name = param(&#39;name&#39;);
+        template &#39;hello&#39;, { name =&gt; $name };
+    };</code></pre>
+
+</div>
+
+<p>This is a very good way to factorize common parts of your views.</p>
+
+<h3>Static files</h3>
+
+<p>Hmm, our website doesn't look very nice, it's a plain old HTML file without any styling! We need a CSS style sheet. But how will we serve it? Do we need to create a route to serve a static file? It could indeed be easy to do...</p>
+
+<p>You're familiar with Dancer's concepts now, so I'm sure you could write it just now. Close this book, and write a route that render a static file, and then come back here, I'll wait<font class="footnote"> (footnote: Well, I might grab a beer meanwhile, but I'm sure you'll forgive me)</font>.</p>
+
+<p>OK, so let's see what we have:</p>
+
+<div class="programlisting">
+
+<pre><code>    use File::Spec;
+    use File::Slurp &#39;read_file&#39;;
+    
+    get &#39;/:file&#39; =&gt; sub {
+        my $file = param(&#39;file&#39;);
+        my $path = File::Spec-&gt;catfile(&#39;./public&#39;, $file);
+    
+        if (! -f $path) {
+            status 404;
+            return &quot;Unknown file $file&quot;;
+        }
+    
+        my $content = read_file( $path );
+        header &quot;Content-Lenght&quot; =&gt; length($content);
+        return $content;
+    };</code></pre>
+
+</div>
+
+<p>Wow, OK, I cheated a bit. I'm using here a couple of keywords from the DSL that we don't already know: <code>status</code> and <code>header</code>, but aren't you able to guess what they do?</p>
+
+<p>I'm sure you are! Obviously, <code>status</code> lets us alter the status code Dancer will send to the client (the default is <code>200</code>) and <code>header</code> sets a new header to the response (here the content length of the body, which is a good thing to do, if we want to be a polite HTTP server!).</p>
+
+<p>Let's test that (assuming we have a <code>./pulic</code> directory locally when running the application):</p>
+
+<div class="programlisting">
+
+<pre><code>    $ cat &gt; ./public/foo.txt
+    This is foo
+
+    $ curl -i http://0:3000/foo.txt
+    HTTP/1.0 200 OK
+    Server: Perl Dancer 1.3116
+    Content-Length: 12
+    Content-Type: text/html
+    Content-Lenght: 12
+    X-Powered-By: Perl Dancer 1.3116
+
+    This is foo</code></pre>
+
+</div>
+
+<p>Nice. That route handler is able to serve a static file. Hmm, but we don't need to implement that, do we? Of course not. It was an interesting question for the reader at this point of the book, that's all!</p>
+
+<p>Dancer - of course - comes with a built-in feature that allows you to serve any file hosted in a public directory (which is by default <code>appdir/public</code>).</p>
+
+<p>So back to our little application example, if we want to provide a CSS file, we just need to create a <code>public</code> directory and put it there (or even better, in <code>public/css/style.css</code>).</p>
+
+<h3>Configuration</h3>
+
+<p>Wait a minute. If we look back at what we've said in this section, we've defined to settings to our application: <code>template</code> and <code>layout</code>. We did that directly in our application's code. What if we want to separate that (how the application is configured) from the code (what the application is doing)?</p>
+
+<p>Well, it's indeed a good habit to store all configuration bits in... a configuration file. Dancer allows us to do so, when it initializes the application, it'll look for a <code>config.yml</code> file and will load its values into the application's registry.</p>
+
+<p>In our case, we could just add a config.yml file with the following content:</p>
+
+<div class="programlisting">
+
+<pre><code>    template: &quot;template_toolkit&quot;
+    layout: &quot;main&quot;</code></pre>
+
+</div>
+
+<h3>Bootstraping an application</h3>
+
+<p>So, we've moved step by step from a single script to a more structured application with templates, static files and configuration files, and we did that manually.</p>
+
+<p>Obviously, when we start a new application from scratch, and we know we want that application to be a real website (instead of a web service, for instance), it's a bit boring to create all the needed files by hand.</p>
+
+<p>Dancer provides a nice helper to bootstrap the application structure, just like so:</p>
+
+<div class="programlisting">
+
+<pre><code>    $ dancer -a MyAwesomeApp
+    ...</code></pre>
+
+</div>
+
+<p>This will create a directory named <code>MyAwesomeApp</code> which will contain a fully functional application (even with unit tests!).</p>
+
+<p>The app can be started with the command <code>perl ./bin/app.pl</code> and even provide a nice default homepage.</p>
+
+<h2>Conclusion</h2>
+
+<p>We've seen in this chapter how we could create a Dancer application from scratch, starting with a dummy <em>Hello World</em> thing to a (still dummy) more complex application with templates, static files and configuration bits.</p>
+
+<p>Of course, Dancer is much, much more than the top of the iceberg we've just seen, but I hope this chapter helped to give you an idea of how things are done with it.</p>
+
+<p>We'll now continue our journey to better and more fun web development with a chapter focused on the power of route handlers. Get ready for heavy dispatching.</p>
+
+</body>
+</html>
+
