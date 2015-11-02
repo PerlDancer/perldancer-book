@@ -1,18 +1,1 @@
 
-To build the chapters:
-
-  ./build/tools/build_chapters.pl
-
-This will replace all L<XXX> tokens by sections/XXX.pod or examples/XXX.pl
-
-To run the examples: ./build/tools/run.pl examples/XXX.pl
-
-
-TODO :
-
- - Find a way to build a complete PDF with a table of contents and an index a t
- the end of the book.
-
- - Footnotes are not rendered nicely in HTML, if possible, find a way to render
-   them as real footnotes, like in Wikipedia for instance.
-

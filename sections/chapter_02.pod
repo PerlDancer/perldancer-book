@@ -14,11 +14,6 @@ static mapping and as complex as a pure Perl regular expression.
 In this chapter we'll cover all the details about route handlers and we'll see
 how to organize them when your application grows.
 
-L<methods>
-L<patterns>
-L<regex>
-L<prefix>
-L<control_flow>
 
 =head1 Conclusion
 
