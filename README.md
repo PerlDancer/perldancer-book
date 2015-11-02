@@ -42,11 +42,6 @@ The order of the chapters might change, that's why we don't number them here.
   * Introduction
     * How this book was written
     * How to read this book
-    * Resources for beginning web application developers
-      * SQL injection
-      * Parameter checking
-      * XSS and CSRF
-      * What else???
     * "Ballet", a real-life application
   * Chapter X - Bootstraping the application, very first steps
     * In this chapter, we create an app from scracth and make it display our homepage
@@ -77,6 +72,11 @@ The order of the chapters might change, that's why we don't number them here.
     * Role-based access with Dancer2::Plugin::Auth::Extensible
     * Using third party authentication (Facebook/Twitter/OAuth, etc.)
   * Chapter X - Deploying the app, going to production
+  * Chapter X - Security, it matters!
+    * SQL injection
+    * Parameter checking
+    * XSS and CSRF
+    * What else???
   * Postface - PerlDancer A brief history of code
     * The genesis, how Dancer was born
     * The community behind the project, how to contribute
