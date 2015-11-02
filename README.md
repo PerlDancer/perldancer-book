@@ -42,15 +42,40 @@ The order of the chapters might change, that's why we don't number them here.
   * Introduction
     * How this book was written
     * How to read this book
+    * Resources for beginning web application developers
+      * SQL injection
+      * Parameter checking
+      * XSS and CSRF
+      * What else???
     * "Ballet", a real-life application
   * Chapter X - Bootstraping the application, very first steps
     * In this chapter, we create an app from scracth and make it display our homepage
   * Chapter X - TODO Session  
+    * Dancer2::Session::Simple
+      * Good for development, not for production
+      * Sessions in a multi-process production environment
+      * Scaling up for multi-server deployments 
+        * What engines are suited for this?
+        * Why?
   * Chapter X - TODO Serializers
   * Chapter X - TODO Database
+    * Getting started with Dancer2::Plugin::Database
+    * Moving to an ORM using Dancer2::Plugin::DBIC
+    * Using other database engines (MongoDB, etc.)
   * Chapter X - TODO Configuration
+    * Available options (YAML, JSON, etc.)
+    * Environment Variables
+    * Order of Operations
+      * Explain why one would want to use ENV rather than file, etc.
+    * Deployment environment specific configuration
   * Chapter X - TODO Logging 
+    * Why do we log?
+    * What to log?
+    * Where to log to?
   * Chapter X - TODO Authentication
+    * Simple authentication with Dancer2::Plugin::Auth::Tiny
+    * Role-based access with Dancer2::Plugin::Auth::Extensible
+    * Using third party authentication (Facebook/Twitter/OAuth, etc.)
   * Chapter X - Deploying the app, going to production
   * Postface - PerlDancer A brief history of code
     * The genesis, how Dancer was born
