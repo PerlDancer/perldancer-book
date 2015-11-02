@@ -10,20 +10,28 @@
 
 =end epigraph
 
-PerlDancer is a library used for web development since 2009 and became quickly a
-popular choice for Perl developers wanting to write web applications.
+PerlDancer is a Perl library primarily used for building web applications. The 
+development of Dancer started in 2009. After the debut of the first version of Dancer 
+in February of 2010, the burgeoning framework quickly became a popular choice for Perl
+developers seeking to write web applications within an easy to use and highly performant
+modern web framework.  
 
-It has a striving community and is still heavily used and developed more than
-four years after its first release.
+The Dancer community continues to grow at a rapid pace and continues to be heavily used 
+by business large and small. As of the writing of this book, the second version of 
+Dancer, a complete rewrite of the first, is a recommended alternative to the first
+version despite continued development. 
 
-This book attempts to give a full overview over Dancer's philosophy, features,
-and ecosystem. 
+After reading this book you should have an understanding of Dancer's philosophy, 
+features, and ecosystem. You should also be familiar with the differences between
+the first and second versions of the framework as well as reasons why the authors
+and the Dancer community at large recommend migrating to the second version of the 
+framework over time.
 
-I hope you'll enjoy reading this book as much as you could enjoy writing a web
-application with Dancer, and I hope that it will become your companion when 
+We hope you'll enjoy reading this book as much as you could enjoy writing a web
+application with Dancer, and we hope that it will become your companion when 
 tackling a web development project.
 
-Let's enter the dance floor!
+Now...let's enter the dance floor!
 
 =head1 Origins
 
@@ -36,9 +44,10 @@ L<versions>
 
 =head1 Credits
 
-This book would not have been possible without the help of many people.
+This book would not have been possible without the help of many people and to
+them the author(s) are truly grateful!
 
-While the author tried very hard to fix all typos and errors in this book,
-imperfections might still exist, and are the fault of the imperfect author. 
+While the author(s) tried very hard to fix all typos and errors in this book,
+imperfections might still exist, and are the fault of the imperfect author(s). 
 
 =cut
