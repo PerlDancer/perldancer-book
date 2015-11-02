@@ -19,7 +19,7 @@ electronic formats and as printed copy.
 ## Fundraising 
 
 To finance the costs of publishing many printed-copies of the book (we aim at a
-first run of 500 copies) we started a Kickstarter campaign.
+first run of 500 copies) we started a [Kickstarter campaign](https://www.kickstarter.com/projects/1856511822/perldancer-book).
 
 We have 30 days to raise 15,000 euros. We estimated this to be enough to cover
 the production of 500 copies and sending them to their owners with appropriate
