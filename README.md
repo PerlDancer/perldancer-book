@@ -25,7 +25,7 @@ We have 30 days to raise 15,000 euros. We estimated this to be enough to cover
 the production of 500 copies and sending them to their owners with appropriate
 shipping costs.
 
-We'll aslo use some of the money to "buy time" to the authors, when needed (as all
+We'll also use some of the money to "buy time" to the authors, when needed (as all
 of us are working on this project during our free-time).
 
 ## Table of contents
@@ -46,12 +46,37 @@ The order of the chapters might change, that's why we don't number them here.
   * Chapter X - Bootstraping the application, very first steps
     * In this chapter, we create an app from scracth and make it display our homepage
   * Chapter X - TODO Session  
+    * Dancer2::Session::Simple
+      * Good for development, not for production
+      * Sessions in a multi-process production environment
+      * Scaling up for multi-server deployments 
+        * What engines are suited for this?
+        * Why?
   * Chapter X - TODO Serializers
   * Chapter X - TODO Database
+    * Getting started with Dancer2::Plugin::Database
+    * Moving to an ORM using Dancer2::Plugin::DBIC
+    * Using other database engines (MongoDB, etc.)
   * Chapter X - TODO Configuration
+    * Available options (YAML, JSON, etc.)
+    * Environment Variables
+    * Order of Operations
+      * Explain why one would want to use ENV rather than file, etc.
+    * Deployment environment specific configuration
   * Chapter X - TODO Logging 
+    * Why do we log?
+    * What to log?
+    * Where to log to?
   * Chapter X - TODO Authentication
+    * Simple authentication with Dancer2::Plugin::Auth::Tiny
+    * Role-based access with Dancer2::Plugin::Auth::Extensible
+    * Using third party authentication (Facebook/Twitter/OAuth, etc.)
   * Chapter X - Deploying the app, going to production
+  * Chapter X - Security, it matters!
+    * SQL injection
+    * Parameter checking
+    * XSS and CSRF
+    * What else???
   * Postface - PerlDancer A brief history of code
     * The genesis, how Dancer was born
     * The community behind the project, how to contribute
