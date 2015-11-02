@@ -11,7 +11,7 @@ It has been created in 2009 and is now a full-featured mature and dynamic
 project, developed by a striving community of passionate developers.
 
 The core team has started writing a book about PerlDancer, in order to offer its
-community of users a great documentation material, as a printed copy.
+community of users a great documentation material, as a printed copies.
 
 This repository holds the contents of the book, our goal is to publish it in
 electronic formats and as printed copy.
@@ -25,13 +25,13 @@ We have 30 days to raise 15,000 euros. We estimated this to be enough to cover
 the production of 500 copies and sending them to their owners with appropriate
 shipping costs.
 
-We'll aslo some of the money to "buy time" to the authors, when needed (as all
-of us are working on our free-time).
+We'll aslo use some of the money to "buy time" to the authors, when needed (as all
+of us are working on this project during our free-time).
 
 ## Table of contents
 
 This is a first draft of the Table of Contents of the book. Of course it will
-change,  but will give a good idea of the book's content.
+change, but it gives a good idea of the book's expected content.
 
 The order of the chapters might change, that's why we don't number them here.
 
@@ -60,7 +60,7 @@ The order of the chapters might change, that's why we don't number them here.
 
 To build the chapters:
 
-  ./build/tools/build_chapters.pl
+  `./build/tools/build_chapters.pl`
 
 This will replace all L<XXX> tokens by sections/XXX.pod or examples/XXX.pl
 
