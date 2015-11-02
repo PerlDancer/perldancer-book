@@ -1,0 +1,115 @@
+<html>
+<body>
+<link rel='stylesheet' href='style.css' type='text/css'>
+
+<h1>Preface</h1>
+
+<div class="epigraph">
+
+<p>"Without deviation from the norm, progress is not possible."</p>
+
+<p>- Frank Zappa</p>
+
+</div>
+
+<p>PerlDancer is a library used for web development since 2009 and became quickly a popular choice for Perl developers wanting to write web applications.</p>
+
+<p>It has a striving community and is still heavily used and developed more than four years after its first release.</p>
+
+<p>This book attempts to give a full overview over Dancer's philosophy, features, and ecosystem.</p>
+
+<p>I hope you'll enjoy reading this book as much as you could enjoy writing a web application with Dancer, and I hope that it will become your companion when tackling a web development project.</p>
+
+<p>Let's enter the dance floor!</p>
+
+<h2>Origins</h2>
+
+<h3>In the beginning, there was CGI...</h3>
+
+<p><a name="CGI"></p>
+
+<p>When first developers started to write web applications, before PHP or Ruby on Rails existed, there was one simple and unique way to go: CGI. It wasn't a framework, nor a design pattern per say, it was a name for describing a program that spoke HTTP.</p>
+
+<p>A CGI script had to parse the query string in order to extract parameters into a handy form, it had to dispatch the execution flow to an appropriate function and then, to take care of the output, making sure all needed headers would be sent to the response body.</p>
+
+<p>With CGI, there is no abstraction of the communication layer: the program <em>speaks</em> HTTP. It's possible to use helper functions, but the notion of HTTP is deeply embedded into the program's logic.</p>
+
+<p>It works, yes, but it's very complex to maintain because business logic (what your program does) and implementation details (how it's working) are completely mixed together.</p>
+
+<p>After more than a decade, it's now well known in the Perl community that using the CGI module for writing a web application is probably the worst idea one can have.</p>
+
+<h3>MVC Frameworks</h3>
+
+<p><a name="MVC"></p>
+
+<p>It became quite quickly obvious that CGI was not able to scale nicely with complex applications, and that mixing the application logic with communication details led to more and more confusion in the resulting code.</p>
+
+<p>Different attempts were made to find better ways for writing web applications and an old paradigm was seen to be a very good fit: the Model-View-Controller design pattern. It's a mistake to think that MVC was invented during the Web 2.0 excitement era, it was actually invented at Xerox Park in 1979 when first graphic interfaces were being designed.</p>
+
+<p>It appears that MVC fits perfectly for web development needs and many frameworks implemented that paradigm and built powerful systems on top of it, one of the most popular was Ruby on Rails, but all languages had their own: Zend or Symfony for PHP, Django for Python and Catalyst for Perl.</p>
+
+<p>MVC frameworks are a good approach and the paradigm itself ensures a clean code structure: database queries are handled by the models, controllers make sure dispatching rules are properly handled and all rendering needs are powered by views.</p>
+
+<p>This comes at a price though, the whole system is quite big and lots of conventions are to be kept in mind. Each MVC framework comes with its own vision of what MVC is, and how it's implemented. The learning curve is a bit long, one needs to first understand how the M, the V and the C are connected together in the framework. Then all the configuration details should be understood because of their impact on the resulting application. Most of the time, when a new MVC framework is tackled, the easiest way to proceed is to bootstrap a new default application, and move from there.</p>
+
+<p>MVC is clearly better than CGI, it abstracts the HTTP layer and ensures a nice structure for the application code, but it's a bit heavyweight.</p>
+
+<h3>The concept of Micro-Frameworks</h3>
+
+<p><a name="microframework"></p>
+
+<p>At some point, a new idea rose in the web development scene. What if we could have a good abstraction system, a nice code organization and a lightweight system at the same time?</p>
+
+<p>What if there was a way to describe a web application in it's purest form while forgetting about the deployment and communication layers and yet avoiding too much boilerplate code?</p>
+
+<p>When the Sinatra framework was published in 2008, that is certainly the kind of feeling that developers had when using it. Sinatra introduced a new paradigm for web application development, a way of doing things where <em>lightweight</em> was the golden rule.</p>
+
+<p>When I discovered Sinatra in summer 2009, I admired the elegant design it has, and looked for something similar in Perl. As I didn't find anything close to it, I started to play with a little experiment that tried to implement a Sinatra-like system with Perl. Dancer was born. Today, there is a microframework in quite each dynamic language: Ruby has Sinatra (obviously), PHP has Slim, Python has Flask and Perl has Dancer.</p>
+
+<p>The concept of microframeworks describes the idea of a library that allows development of a web application with a minimal set of tools. The core of the library is meant to be kept small yet should not lack features. A microframework should provide the essentials bits everyone needs to write a web application and should provide ways to add or change every parts that are not mandatory.</p>
+
+<p>In short, a microframework let you write your web application while staying out of the way as much as possible. This gives two major advantages over classic MVC frameworks: a very short learning curve and maximum freedom for the developer.</p>
+
+<p>I think that's why most of PerlDancer users claim they <em>enjoy</em> writing web applications with it: because it's so simple they can start doing things after a few minutes and as they go with their development, they realize how free they are.</p>
+
+<h3>A DSL for Web Development</h3>
+
+<p><a name="DSL"></p>
+
+<p>Dancer is a web microframework for Perl. It's also often referred to as a Domain-Specific Language (or DSL) for web development. As a matter of fact, when you look at Dancer, the first thing you see is the set of keywords it provides: <code>get</code>, <code>param</code>, <code>session</code>, <code>template</code>, <code>cookie</code>... All these are atomic helpers designed to do one simple web-related thing. We could see Dancer as a small language for describing a web application, actually it's very close to that.</p>
+
+<p>In the same spirit as with Perl itself, the core is meant to be kept as small as possible and should be complete enough to allow all possible extensions to occur in the ecosystem. Perl hackers will recognize here the philosophy of Perl and its CPAN, Dancer mimics that with pride.</p>
+
+<h3>PSGI</h3>
+
+<p><a name="PSGI"></p>
+
+<p>In 2009, when the first versions of Dancer were published, a little revolution embraced the Perl web development scene, with an abstraction layer named PSGI.</p>
+
+<p>Before PSGI, all web frameworks needed to implement different deployment solutions for their users: CGI, FastCGI, standalone servers, etc. The same code was written by each framework and there wasn't a standard way for deploying a web application.</p>
+
+<p>With PSGI, all web frameworks are able to rely on it for deployment needs, it allows them to forget about <em>how the application is deployed</em> and let them focus on <em>how the application is written</em>.</p>
+
+<p>A Dancer application is a PSGI application, which means that it can be deployed virtually anywhere: wherever PSGI is supported, Dancer can run.</p>
+
+<p>This is something less to think about, and more time and brainpower spent on the stuff that matters: what your application does.</p>
+
+<h2>Versions of Dancer</h2>
+
+<p><a name="versions"></p>
+
+<p>Dancer exists in two versions at the time of this writing, version 1 and 2.</p>
+
+<p>Dancer 1 is the most widely used version of Dancer, as it's out since 2009 and has a quite big ecosystem of extensions available on the CPAN. Dancer 2 is younger (published in 2013) but supports all the DSL features of Dancer 1 with a better core.</p>
+
+<p>This book is a reference about Dancer's philosophy, DSL and ecosystem and hence is meaningful for both versions 1 and 2. All examples in this book will be made with Dancer but all of them apply to Dancer 2.</p>
+
+<h2>Credits</h2>
+
+<p>This book would not have been possible without the help of many people.</p>
+
+<p>While the author tried very hard to fix all typos and errors in this book, imperfections might still exist, and are the fault of the imperfect author.</p>
+
+</body>
+</html>
+
