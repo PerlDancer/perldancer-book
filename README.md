@@ -83,6 +83,15 @@ The order of the chapters might change, that's why we don't number them here.
 
 ## Building this book
 
+### Dependencies
+
+You need the following Perl modules installed to build the book:
+
+  * Pod::PsuedoPod::HTML
+
+
+### Build
+
 To build the chapters:
 
   `./build/tools/build_chapters.pl`
@@ -92,11 +101,9 @@ This will replace all L<XXX> tokens by sections/XXX.pod or examples/XXX.pl
 To run the examples: ./build/tools/run.pl examples/XXX.pl
 
 
-TODO :
+### TODO
 
- - Find a way to build a complete PDF with a table of contents and an index at
- the end of the book.
+  * Find a way to build a complete PDF with a table of contents and an index at the end of the book.
+  * Footnotes are not rendered nicely in HTML, if possible, find a way to render them as real footnotes, like in Wikipedia for instance.
 
- - Footnotes are not rendered nicely in HTML, if possible, find a way to render
-   them as real footnotes, like in Wikipedia for instance.
 
