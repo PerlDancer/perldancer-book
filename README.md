@@ -25,7 +25,7 @@ We have 30 days to raise 15,000 euros. We estimated this to be enough to cover
 the production of 500 copies and sending them to their owners with appropriate
 shipping costs.
 
-We'll aslo use some of the money to "buy time" to the authors, when needed (as all
+We'll also use some of the money to "buy time" to the authors, when needed (as all
 of us are working on this project during our free-time).
 
 ## Table of contents
