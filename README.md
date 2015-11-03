@@ -42,6 +42,7 @@ The order of the chapters might change, that's why we don't number them here.
   * Introduction
     * How this book was written
     * How to read this book
+    * Beginners web programming resources
     * "Ballet", a real-life application
   * Chapter X - Bootstraping the application, very first steps
     * In this chapter, we create an app from scracth and make it display our homepage
