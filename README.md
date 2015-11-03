@@ -35,11 +35,11 @@ change, but it gives a good idea of the book's expected content.
 
 The order of the chapters might change, that's why we don't number them here.
 
-  * Preface 
+  * Preface (Alexis)
     * Origins
     * A DSL for Web Development
     * Credits
-  * Introduction
+  * Introduction 
     * How this book was written
     * How to read this book
     * Beginners web programming resources
