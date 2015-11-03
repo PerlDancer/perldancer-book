@@ -11,5 +11,5 @@ better core.
 
 This book is a reference about Dancer's philosophy, DSL and ecosystem and hence 
 is meaningful for both versions 1 and 2. All examples in this book will be
-made with Dancer but all of them apply to Dancer 2.
+made with Dancer 2.
 
