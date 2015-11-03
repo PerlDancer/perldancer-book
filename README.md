@@ -46,6 +46,15 @@ The order of the chapters might change, that's why we don't number them here.
     * "Ballet", a real-life application
   * Chapter X - Bootstraping the application, very first steps
     * In this chapter, we create an app from scracth and make it display our homepage
+  * Chapter X - TODO Configuration
+    * Available options (YAML, JSON, etc.)
+    * Environment Variables
+    * Order of Operations
+      * Explain why one would want to use ENV rather than file, etc.
+    * Deployment environment specific configuration
+  * Chapter X - Request Object
+  * Chapter X - Response Object
+  * Chapter X - Templates
   * Chapter X - TODO Session  
     * Dancer2::Session::Simple
       * Good for development, not for production
@@ -54,16 +63,11 @@ The order of the chapters might change, that's why we don't number them here.
         * What engines are suited for this?
         * Why?
   * Chapter X - TODO Serializers
+  * Chapter X - Using Plugins
   * Chapter X - TODO Database
     * Getting started with Dancer2::Plugin::Database
     * Moving to an ORM using Dancer2::Plugin::DBIC
     * Using other database engines (MongoDB, etc.)
-  * Chapter X - TODO Configuration
-    * Available options (YAML, JSON, etc.)
-    * Environment Variables
-    * Order of Operations
-      * Explain why one would want to use ENV rather than file, etc.
-    * Deployment environment specific configuration
   * Chapter X - TODO Logging 
     * Why do we log?
     * What to log?
@@ -78,6 +82,7 @@ The order of the chapters might change, that's why we don't number them here.
     * Parameter checking
     * XSS and CSRF
     * What else???
+  * Chapter X - Writing Plugins
   * Postface - PerlDancer A brief history of code
     * The genesis, how Dancer was born
     * The community behind the project, how to contribute
