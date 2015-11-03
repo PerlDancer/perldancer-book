@@ -14,6 +14,8 @@ require App::pod2pdf
 
 my $outpath = catdir( qw( build pdf ) );
 
+mkdir $outpath if ( ! -d $outpath ); 
+
 for my $chapter ( @chapters ){
     my @filename = split( /\./ , $chapter );
     print "Converting $chapter to pdf\n";
